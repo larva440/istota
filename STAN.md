@@ -18,13 +18,14 @@
 ## Nie działa albo niesprawdzone
 
 - **Ollamy nie ma na komputerze autora**, więc rozmowa zwraca „Brak połączenia z modelem AI”. Do decyzji: model lokalny (Ollama i który model) czy w chmurze (`USTALENIA.md`, pytanie 2).
-- Interfejsu w przeglądarce jeszcze nie sprawdzono w działaniu.
+- Interfejs sprawdzony 2026-11-09: ładuje się, pamięć działa, rozmowa bez modelu zwraca czytelny błąd.
 - Głos: rozpoznawanie mowy w Chrome idzie przez serwery Google (`PROCES.md` §7).
 
 ## Długi
 
 - Usunięcie wspomnienia nie usuwa go z historii rozmów.
 - `relevant_memories` dopasowuje po słowach, nie po znaczeniu.
+- Wiadomość właściciela trafia do historii także wtedy, gdy model nie odpowie (`chat`: `add_message` przed `ask_llm`).
 - Nazwa: repo nazywa się „istota”, a program w interfejsie mówi o sobie „JARVIS HYBRID” (`USTALENIA.md`, pytanie 1).
 
 ## Następne kroki (z README prototypu, kolejność do decyzji autora)

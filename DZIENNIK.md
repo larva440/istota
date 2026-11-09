@@ -25,3 +25,5 @@ Commit `187aec9`: prototyp bez zmian.
 → 11:34 commity `ef79332` (0.1.1) i `1b6c786` (proces), push.
 
 **15:44 — autor, dosłownie:** „odpal istotę”
+
+→ 15:44 wynik: istota 0.1.1 działa na http://127.0.0.1:8765 (proces w tle, panel przeglądarki otwarty, baza `data/jarvis.sqlite3`). Interfejs się ładuje. Rozmowa z modelem nie zadziała, dopóki nie ma Ollamy albo innego modelu (pytanie otwarte „model lokalny czy chmura”).

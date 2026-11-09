@@ -2,6 +2,10 @@
 
 Najnowsze na górze. Format nagłówka: `## x.y.z · RRRR-MM-DD`; `./sprawdz.sh` porównuje go z `VERSION` w `app.py`.
 
+## 0.3.0 · 2026-11-09
+
+- Nazwa: Istota (decyzja autora 15:52). Interfejs, polecenie systemowe, polecenie propozycji, nagłówek serwera i komunikaty mówią „Istota” zamiast „JARVIS HYBRID”/„Jarvis”. Zmienne `JARVIS_*` i plik bazy bez zmian.
+
 ## 0.2.0 · 2026-11-09
 
 - Model w chmurze (decyzja autora 15:47): ustawienia właściciela z `.local/istota.env` (poza repo), tylko klucze `JARVIS_*`, zmienna środowiska wygrywa. Bez pliku nic się nie zmienia (model lokalny).

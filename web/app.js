@@ -18,7 +18,7 @@ function element(tag, klass, text) {
 async function api(path, payload) {
   const opts = payload === undefined ? {} : {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)};
   let response;
-  try { response = await fetch('/api/' + path, opts); } catch { throw new Error('Brak połączenia z lokalnym serwerem Jarvisa.'); }
+  try { response = await fetch('/api/' + path, opts); } catch { throw new Error('Brak połączenia z lokalnym serwerem Istoty.'); }
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || 'Wystąpił błąd.');
   return data;
@@ -33,7 +33,7 @@ function appendMessage(role, content) {
   const container = $('messages');
   const empty = container.querySelector('.empty'); if (empty) empty.remove();
   const node = element('div','message '+role);
-  node.appendChild(element('div','tag', role === 'user' ? 'TY' : 'JARVIS'));
+  node.appendChild(element('div','tag', role === 'user' ? 'TY' : 'ISTOTA'));
   node.appendChild(element('div', '', content));
   container.appendChild(node); container.scrollTop = container.scrollHeight;
 }

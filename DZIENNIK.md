@@ -33,3 +33,7 @@ Commit `187aec9`: prototyp bez zmian.
 → 15:48 wynik: decyzja „Chmura: Claude API” (USTALENIA). Istota 0.2.0: czyta ustawienia właściciela z `.local/istota.env` (poza repo). Plik założony z adresem Anthropic i modelem `claude-sonnet-5-5`, pole klucza puste dla autora. 8 testów OK, w tym test granicy.
 
 **15:52 — autor, dosłownie:** „Istota”
+
+→ 15:52 wynik: nazwa Istota w USTALENIA; program 0.3.0 przedstawia się jako Istota (interfejs, prompty, serwer). Zmienne `JARVIS_*` i baza bez zmian. 8 testów OK, sprawdz.sh OK.
+
+**15:52 — autor, dosłownie:** „już”

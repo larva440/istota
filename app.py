@@ -1,4 +1,4 @@
-"""JARVIS HYBRID 0.1 — local-first assistant, Python stdlib only.
+"""Istota — local-first assistant, Python stdlib only.
 
 Security boundaries: loopback only; no shell/code execution; skills are prompt text;
 code improvement proposals are drafts requiring separate manual implementation.
@@ -16,7 +16,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
-VERSION = '0.2.0'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
+VERSION = '0.3.0'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
 ROOT = Path(__file__).resolve().parent
 LOCAL_ENV = ROOT / '.local' / 'istota.env'
 
@@ -46,10 +46,10 @@ LLM_KEY = os.environ.get('JARVIS_LLM_API_KEY', '')
 MODEL_TIMEOUT_SECONDS = 100
 MAX_BODY = 100_000
 
-SYSTEM = """Jesteś JARVIS HYBRID, osobistym asystentem i partnerem rozwoju właściciela.
+SYSTEM = """Jesteś Istota, osobistym asystentem i partnerem rozwoju właściciela.
 Rozmawiaj po polsku, naturalnie, ciepło i konkretnie. W razie potrzeby ucz krok po kroku.
 Masz dwa tryby jednocześnie: (1) rozmowa, nauka i wsparcie celów właściciela;
-(2) programowanie, myślenie systemowe i propozycje ulepszeń samego Jarvisa.
+(2) programowanie, myślenie systemowe i propozycje ulepszeń samej Istoty.
 Nigdy nie twierdź, że zrobiłeś coś w komputerze, jeśli nie masz do tego narzędzia.
 Nie masz teraz dostępu do terminala, plików poza własną bazą ani internetu.
 Nie wykonujesz kodu i nie zmieniasz własnego programu. Proponujesz zmiany do zatwierdzenia.
@@ -198,7 +198,7 @@ def propose(goal, kind):
                 'Instrukcja ma być wyłącznie bezpieczną instrukcją tekstową dla przyszłych odpowiedzi, '
                 'bez kodu, poleceń shell i obietnic narzędzi. ')
     else:
-        task = ('Wymyśl jedną KONKRETNĄ ZMIANĘ W KODZIE aplikacji JARVIS, '
+        task = ('Wymyśl jedną KONKRETNĄ ZMIANĘ W KODZIE aplikacji Istota, '
                 'opisz pliki, plan i testy. To tylko projekt do ręcznej implementacji; '
                 'NIE możesz wykonywać poleceń ani pisać plików. ')
     prompt = (task + 'Odpowiedz WYŁĄCZNIE JSON (bez markdown) o polach: '
@@ -246,7 +246,7 @@ def review_proposal(proposal_id, approve):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'JarvisHybrid/' + VERSION
+    server_version = 'Istota/' + VERSION
 
     def trusted_request(self):
         # Reject DNS rebinding and requests from another local origin/port.
@@ -261,7 +261,7 @@ class Handler(BaseHTTPRequestHandler):
             return False
         return True
     def log_message(self, fmt, *args):
-        sys.stderr.write('[jarvis] '+fmt % args+'\n')
+        sys.stderr.write('[istota] '+fmt % args+'\n')
 
     def send_json(self, obj, status=200):
         payload = json.dumps(obj, ensure_ascii=False).encode('utf-8')
@@ -296,7 +296,7 @@ class Handler(BaseHTTPRequestHandler):
         if endpoint == '/style.css':
             return self.send_asset(ROOT/'web'/'style.css','text/css; charset=utf-8')
         if endpoint == '/api/status':
-            return self.send_json({'name':'JARVIS HYBRID','version':VERSION,'model':LLM_MODEL,
+            return self.send_json({'name':'Istota','version':VERSION,'model':LLM_MODEL,
                                    'engine': 'local Ollama' if 'localhost:11434' in LLM_URL or '127.0.0.1:11434' in LLM_URL else ('Claude (chmura)' if 'anthropic.com' in LLM_URL else 'OpenAI-compatible'),
                                    'memory_count':len(rows('SELECT id FROM memories'))})
         if endpoint == '/api/state':
@@ -345,13 +345,13 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     init_db()
     server = ThreadingHTTPServer((HOST,PORT),Handler)
-    print(f'JARVIS HYBRID {VERSION}: http://{HOST}:{PORT}',flush=True)
+    print(f'Istota {VERSION}: http://{HOST}:{PORT}',flush=True)
     print(f'Model: {LLM_MODEL} / {LLM_URL}',flush=True)
     print('Zatrzymanie: Ctrl+C. Serwer dostępny tylko na tym komputerze.', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print('\nZatrzymano Jarvisa.')
+        print('\nZatrzymano Istotę.')
     finally:
         server.server_close()
 

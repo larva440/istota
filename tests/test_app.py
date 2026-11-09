@@ -44,6 +44,13 @@ class JarvisTests(unittest.TestCase):
         app.remember('Lubię herbatę z cytryną')
         found = app.relevant_memories('Jak rozwijać programowanie Unity?',1)
         self.assertIn('Unity',found[0]['content'])
+    def test_connection_is_closed(self):
+        # 0.1.1: połączenie zamknięte po wyjściu z bloku (na Windows otwarte blokowało plik bazy)
+        with app.connection() as db:
+            db.execute('SELECT 1')
+        import sqlite3
+        with self.assertRaises(sqlite3.ProgrammingError):
+            db.execute('SELECT 1')
     def test_invalid_inputs(self):
         with self.assertRaises(ValueError): app.remember('')
         with self.assertRaises(ValueError): app.chat('')

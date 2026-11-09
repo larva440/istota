@@ -10,11 +10,13 @@ import sqlite3
 import sys
 import urllib.error
 import urllib.request
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+VERSION = '0.1.1'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
 ROOT = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get('JARVIS_DB', str(ROOT / 'data' / 'jarvis.sqlite3')))
 HOST = '127.0.0.1'
@@ -40,11 +42,20 @@ def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec='seconds')
 
 
+@contextmanager
 def connection():
+    """Połączenie z bazą: zatwierdza transakcję i zawsze zamyka połączenie.
+
+    0.1.1: samo `with sqlite3.connect()` zatwierdza, ale nie zamyka — na Windows plik bazy
+    zostawał zablokowany (testy nie mogły go usunąć), a otwarte połączenia się mnożyły."""
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH, timeout=15)
     conn.row_factory = sqlite3.Row
-    return conn
+    try:
+        with conn:
+            yield conn
+    finally:
+        conn.close()
 
 
 def init_db():
@@ -216,7 +227,7 @@ def review_proposal(proposal_id, approve):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'JarvisHybrid/0.1'
+    server_version = 'JarvisHybrid/' + VERSION
 
     def trusted_request(self):
         # Reject DNS rebinding and requests from another local origin/port.
@@ -266,7 +277,7 @@ class Handler(BaseHTTPRequestHandler):
         if endpoint == '/style.css':
             return self.send_asset(ROOT/'web'/'style.css','text/css; charset=utf-8')
         if endpoint == '/api/status':
-            return self.send_json({'name':'JARVIS HYBRID','version':'0.1','model':LLM_MODEL,
+            return self.send_json({'name':'JARVIS HYBRID','version':VERSION,'model':LLM_MODEL,
                                    'engine': 'local Ollama' if 'localhost:11434' in LLM_URL or '127.0.0.1:11434' in LLM_URL else 'OpenAI-compatible',
                                    'memory_count':len(rows('SELECT id FROM memories'))})
         if endpoint == '/api/state':
@@ -315,7 +326,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     init_db()
     server = ThreadingHTTPServer((HOST,PORT),Handler)
-    print(f'JARVIS HYBRID 0.1: http://{HOST}:{PORT}',flush=True)
+    print(f'JARVIS HYBRID {VERSION}: http://{HOST}:{PORT}',flush=True)
     print(f'Model: {LLM_MODEL} / {LLM_URL}',flush=True)
     print('Zatrzymanie: Ctrl+C. Serwer dostępny tylko na tym komputerze.', flush=True)
     try:

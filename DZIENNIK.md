@@ -29,3 +29,5 @@ Commit `187aec9`: prototyp bez zmian.
 → 15:44 wynik: istota 0.1.1 działa na http://127.0.0.1:8765 (proces w tle, panel przeglądarki otwarty, baza `data/jarvis.sqlite3`). Interfejs się ładuje. Rozmowa z modelem nie zadziała, dopóki nie ma Ollamy albo innego modelu (pytanie otwarte „model lokalny czy chmura”).
 
 **15:46 — autor, dosłownie:** „Nie mogę odpowiedzieć: Brak połączenia z modelem AI. Uruchom Ollama i pobierz model albo skonfiguruj chmurowe API”
+
+→ 15:48 wynik: decyzja „Chmura: Claude API” (USTALENIA). Istota 0.2.0: czyta ustawienia właściciela z `.local/istota.env` (poza repo). Plik założony z adresem Anthropic i modelem `claude-sonnet-5-5`, pole klucza puste dla autora. 8 testów OK, w tym test granicy.

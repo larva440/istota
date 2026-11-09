@@ -16,8 +16,27 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
-VERSION = '0.1.1'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
+VERSION = '0.2.0'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
 ROOT = Path(__file__).resolve().parent
+LOCAL_ENV = ROOT / '.local' / 'istota.env'
+
+
+def load_local_env(path=LOCAL_ENV, environ=os.environ):
+    """Ustawienia właściciela z .local/istota.env (poza repo). Tylko klucze JARVIS_*,
+    zmienna środowiska ma pierwszeństwo. Bez pliku zostaje model lokalny."""
+    path = Path(path)
+    if not path.is_file():
+        return
+    for line in path.read_text(encoding='utf-8').splitlines():
+        line = line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+        key, value = (part.strip() for part in line.split('=', 1))
+        if key.startswith('JARVIS_') and value:
+            environ.setdefault(key, value.strip(chr(34) + chr(39)))
+
+
+load_local_env()
 DB_PATH = Path(os.environ.get('JARVIS_DB', str(ROOT / 'data' / 'jarvis.sqlite3')))
 HOST = '127.0.0.1'
 PORT = int(os.environ.get('JARVIS_PORT', '8765'))
@@ -278,7 +297,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_asset(ROOT/'web'/'style.css','text/css; charset=utf-8')
         if endpoint == '/api/status':
             return self.send_json({'name':'JARVIS HYBRID','version':VERSION,'model':LLM_MODEL,
-                                   'engine': 'local Ollama' if 'localhost:11434' in LLM_URL or '127.0.0.1:11434' in LLM_URL else 'OpenAI-compatible',
+                                   'engine': 'local Ollama' if 'localhost:11434' in LLM_URL or '127.0.0.1:11434' in LLM_URL else ('Claude (chmura)' if 'anthropic.com' in LLM_URL else 'OpenAI-compatible'),
                                    'memory_count':len(rows('SELECT id FROM memories'))})
         if endpoint == '/api/state':
             return self.send_json({'messages':rows('SELECT * FROM messages ORDER BY id DESC LIMIT 60')[::-1],

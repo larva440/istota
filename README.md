@@ -62,6 +62,7 @@ Przeglądarka (tekst / Web Speech API / synteza mowy)
 
 - Serwer nasłuchuje **tylko na 127.0.0.1**. To nie jest aplikacja wystawiona do internetu.
 - Wspomnienia, historia i zatwierdzone umiejętności zostają lokalnie na dysku.
+- **Claude w chmurze (od 0.2.0):** w pliku `.local/istota.env` (poza repo) ustaw `JARVIS_LLM_URL=https://api.anthropic.com/v1/chat/completions`, `JARVIS_LLM_MODEL` i `JARVIS_LLM_API_KEY`. Usunięcie pliku przywraca model lokalny.
 - **Uwaga:** gdy wybierzesz chmurowy model AI, wysyłasz do dostawcy także część historii i wybrane wspomnienia. Ponadto niektóre przeglądarki wysyłają nagranie do chmurowej usługi rozpoznawania mowy. Jeśli wymagane jest pełne offline, korzystaj z klawiatury i lokalnego modelu, aż do integracji lokalnego STT/TTS.
 - Brak terminala i wykonywania kodu przez AI. Propozycje typu `code` pozostają dokumentem do ręcznego wdrożenia.
 - Model może popełniać błędy i wymyślać fakty. Każdą zmianę kodu należy sprawdzić i przetestować przed wdrożeniem.

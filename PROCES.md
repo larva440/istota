@@ -80,6 +80,7 @@ Każde poszerzenie tych granic dostaje test, który pilnuje nowej granicy. Przyk
   - modelu w chmurze (wysyła historię i wspomnienia);
   - rozpoznawania mowy w przeglądarce (może wysyłać nagranie);
   - każdej integracji.
+- **Stan od 2026-11-09 15:47 (decyzja autora, `USTALENIA.md`):** model w chmurze to Claude (API Anthropic). Włącza go plik właściciela `.local/istota.env` (poza repo); bez pliku istota wraca do modelu lokalnego. Do Anthropic wychodzą przy każdej wiadomości: polecenie systemowe, zatwierdzone umiejętności, dopasowane wspomnienia i ostatnie wiadomości rozmowy. Klucz wpisuje autor; ASY go nie czyta i nie zapisuje.
 - Usunięcie wspomnienia nie usuwa go z historii rozmów (0.1). Do czasu poprawki mów to wprost, gdy właściciel kasuje coś wrażliwego.
 
 ## 8. Skille

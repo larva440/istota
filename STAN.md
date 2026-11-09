@@ -4,9 +4,10 @@
 
 ## Teraz
 
-- **Wersja 0.1.1.** Prototyp GPT „JARVIS HYBRID 0.1” (commit `187aec9`, bez zmian) i jedna poprawka: zamykanie połączeń z bazą (0.1.1).
+- **Wersja 0.2.0.** Prototyp GPT „JARVIS HYBRID 0.1” (commit `187aec9`), zamykanie połączeń z bazą (0.1.1), model w chmurze z pliku właściciela (0.2.0).
+- **Mózg: Claude w chmurze** (decyzja autora 2026-11-09 15:47). `.local/istota.env` założony, model `claude-sonnet-5-5`; czeka na klucz API od autora.
 - Backend korzysta tylko ze standardowej biblioteki Pythona. Działa z Pythonem 3.14 na komputerze autora.
-- Testy: 6 testów (5 z prototypu i 1 nowy), przechodzą na Windows.
+- Testy: 8 testów (5 z prototypu i 3 nowe), przechodzą na Windows.
 
 ## Działa
 
@@ -17,7 +18,7 @@
 
 ## Nie działa albo niesprawdzone
 
-- **Ollamy nie ma na komputerze autora**, więc rozmowa zwraca „Brak połączenia z modelem AI”. Do decyzji: model lokalny (Ollama i który model) czy w chmurze (`USTALENIA.md`, pytanie 2).
+- **Rozmowa czeka na klucz API.** Bez klucza zwraca „Brak połączenia z modelem AI”. Autor wkleja klucz do `.local/istota.env` i uruchamia istotę od nowa.
 - Interfejs sprawdzony 2026-11-09: ładuje się, pamięć działa, rozmowa bez modelu zwraca czytelny błąd.
 - Głos: rozpoznawanie mowy w Chrome idzie przez serwery Google (`PROCES.md` §7).
 

@@ -14,6 +14,19 @@ class JarvisTests(unittest.TestCase):
     def tearDown(self):
         app.DB_PATH = self.original_db
         self.tmp.cleanup()
+    def test_local_env_boundary(self):
+        # Granica §7: bez pliku ustawień nic się nie zmienia, z pliku wchodzą tylko klucze JARVIS_*,
+        # a zmienna ustawiona przez właściciela wygrywa.
+        env = {}
+        app.load_local_env(Path(self.tmp.name) / 'brak.env', env)
+        self.assertEqual(env, {})
+        f = Path(self.tmp.name) / 'istota.env'
+        f.write_text(chr(10).join(['# komentarz', 'JARVIS_LLM_MODEL=claude-sonnet-5-5', 'JARVIS_LLM_API_KEY=', 'PATH=zle', 'JARVIS_PORT=9999']), encoding='utf-8')
+        env = {'JARVIS_PORT': '8765'}
+        app.load_local_env(f, env)
+        self.assertEqual(env, {'JARVIS_PORT': '8765', 'JARVIS_LLM_MODEL': 'claude-sonnet-5-5'})
+    def test_default_model_is_loopback(self):
+        self.assertTrue(app.HOST == '127.0.0.1')
     def test_explicit_memory_and_delete(self):
         response = app.chat('Zapamiętaj: wolę krótkie wyjaśnienia')
         self.assertIn('Zapisałem', response)

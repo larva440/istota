@@ -31,3 +31,5 @@ Commit `187aec9`: prototyp bez zmian.
 **15:46 — autor, dosłownie:** „Nie mogę odpowiedzieć: Brak połączenia z modelem AI. Uruchom Ollama i pobierz model albo skonfiguruj chmurowe API”
 
 → 15:48 wynik: decyzja „Chmura: Claude API” (USTALENIA). Istota 0.2.0: czyta ustawienia właściciela z `.local/istota.env` (poza repo). Plik założony z adresem Anthropic i modelem `claude-sonnet-5-5`, pole klucza puste dla autora. 8 testów OK, w tym test granicy.
+
+**15:52 — autor, dosłownie:** „Istota”

@@ -27,3 +27,5 @@ Commit `187aec9`: prototyp bez zmian.
 **15:44 — autor, dosłownie:** „odpal istotę”
 
 → 15:44 wynik: istota 0.1.1 działa na http://127.0.0.1:8765 (proces w tle, panel przeglądarki otwarty, baza `data/jarvis.sqlite3`). Interfejs się ładuje. Rozmowa z modelem nie zadziała, dopóki nie ma Ollamy albo innego modelu (pytanie otwarte „model lokalny czy chmura”).
+
+**15:46 — autor, dosłownie:** „Nie mogę odpowiedzieć: Brak połączenia z modelem AI. Uruchom Ollama i pobierz model albo skonfiguruj chmurowe API”

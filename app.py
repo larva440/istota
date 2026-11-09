@@ -16,7 +16,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
-VERSION = '0.3.0'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
+VERSION = '0.3.1'  # rejestr: ARTEFAKTY.md (istota); zmiana = CHANGELOG.md w tym samym commicie
 ROOT = Path(__file__).resolve().parent
 LOCAL_ENV = ROOT / '.local' / 'istota.env'
 
@@ -146,9 +146,16 @@ def build_messages(latest_text):
     return [{'role': 'system', 'content': system}] + history
 
 
+def request_body(messages, temperature, url=None):
+    body = {'model': LLM_MODEL, 'messages': messages, 'stream': False}
+    # Nowe modele Claude odrzucają `temperature` (HTTP 400), więc dla Anthropic go nie wysyłamy.
+    if 'anthropic.com' not in (url or LLM_URL):
+        body['temperature'] = temperature
+    return body
+
+
 def ask_llm(messages, temperature=0.5):
-    body = json.dumps({'model': LLM_MODEL, 'messages': messages, 'temperature': temperature,
-                       'stream': False}, ensure_ascii=False).encode('utf-8')
+    body = json.dumps(request_body(messages, temperature), ensure_ascii=False).encode('utf-8')
     headers = {'Content-Type': 'application/json'}
     if LLM_KEY:
         headers['Authorization'] = 'Bearer ' + LLM_KEY

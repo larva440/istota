@@ -37,3 +37,5 @@ Commit `187aec9`: prototyp bez zmian.
 → 15:52 wynik: nazwa Istota w USTALENIA; program 0.3.0 przedstawia się jako Istota (interfejs, prompty, serwer). Zmienne `JARVIS_*` i baza bez zmian. 8 testów OK, sprawdz.sh OK.
 
 **15:52 — autor, dosłownie:** „już”
+
+→ 15:54 wynik: klucz jest w pliku. Pierwsza próba: HTTP 400, bo Claude odrzuca `temperature`. Poprawka 0.3.1 (9 testów OK). Istota uruchomiona od nowa i rozmawia przez Claude: na „kim jesteś?” odpowiedziała po polsku, jako Istota, z opisem swoich granic.

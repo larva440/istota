@@ -27,6 +27,10 @@ class JarvisTests(unittest.TestCase):
         self.assertEqual(env, {'JARVIS_PORT': '8765', 'JARVIS_LLM_MODEL': 'claude-sonnet-5-5'})
     def test_default_model_is_loopback(self):
         self.assertTrue(app.HOST == '127.0.0.1')
+    def test_anthropic_body_has_no_temperature(self):
+        msgs = [{'role': 'user', 'content': 'hej'}]
+        self.assertNotIn('temperature', app.request_body(msgs, 0.5, 'https://api.anthropic.com/v1/chat/completions'))
+        self.assertEqual(app.request_body(msgs, 0.5, 'http://127.0.0.1:11434/v1/chat/completions')['temperature'], 0.5)
     def test_explicit_memory_and_delete(self):
         response = app.chat('Zapamiętaj: wolę krótkie wyjaśnienia')
         self.assertIn('Zapisałem', response)

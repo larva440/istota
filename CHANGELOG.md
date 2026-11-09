@@ -2,6 +2,10 @@
 
 Najnowsze na górze. Format nagłówka: `## x.y.z · RRRR-MM-DD`; `./sprawdz.sh` porównuje go z `VERSION` w `app.py`.
 
+## 0.3.1 · 2026-11-09
+
+- Claude odrzucał każdą wiadomość (HTTP 400: „`temperature` is deprecated for this model”). Dla adresu Anthropic program nie wysyła już `temperature`. Test `test_anthropic_body_has_no_temperature`.
+
 ## 0.3.0 · 2026-11-09
 
 - Nazwa: Istota (decyzja autora 15:52). Interfejs, polecenie systemowe, polecenie propozycji, nagłówek serwera i komunikaty mówią „Istota” zamiast „JARVIS HYBRID”/„Jarvis”. Zmienne `JARVIS_*` i plik bazy bez zmian.

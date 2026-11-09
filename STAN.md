@@ -5,10 +5,10 @@
 ## Teraz
 
 - **Nazwa: Istota** (decyzja autora 2026-11-09 15:52).
-- **Wersja 0.3.0.** Prototyp GPT „JARVIS HYBRID 0.1” (commit `187aec9`), zamykanie połączeń z bazą (0.1.1), model w chmurze z pliku właściciela (0.2.0), nazwa Istota (0.3.0).
-- **Mózg: Claude w chmurze** (decyzja autora 2026-11-09 15:47). `.local/istota.env` założony, model `claude-sonnet-5-5`; czeka na klucz API od autora.
+- **Wersja 0.3.1.** Prototyp GPT „JARVIS HYBRID 0.1” (commit `187aec9`), zamykanie połączeń z bazą (0.1.1), model w chmurze z pliku właściciela (0.2.0), nazwa Istota (0.3.0), Claude bez `temperature` (0.3.1).
+- **Mózg: Claude w chmurze** (decyzja autora 2026-11-09 15:47). `.local/istota.env` założony, model `claude-sonnet-5-5`, klucz wpisał autor. Rozmowa sprawdzona 2026-11-09 15:54: Istota odpowiada po polsku i przedstawia się jako Istota.
 - Backend korzysta tylko ze standardowej biblioteki Pythona. Działa z Pythonem 3.14 na komputerze autora.
-- Testy: 8 testów (5 z prototypu i 3 nowe), przechodzą na Windows.
+- Testy: 9 testów (5 z prototypu i 4 nowe), przechodzą na Windows.
 
 ## Działa
 
@@ -19,7 +19,7 @@
 
 ## Nie działa albo niesprawdzone
 
-- **Rozmowa czeka na klucz API.** Bez klucza zwraca „Brak połączenia z modelem AI”. Autor wkleja klucz do `.local/istota.env` i uruchamia istotę od nowa.
+- Mikrofon w panelu przeglądarki aplikacji jest zablokowany; głos do sprawdzenia w Chrome.
 - Interfejs sprawdzony 2026-11-09: ładuje się, pamięć działa, rozmowa bez modelu zwraca czytelny błąd.
 - Głos: rozpoznawanie mowy w Chrome idzie przez serwery Google (`PROCES.md` §7).
 
@@ -27,7 +27,7 @@
 
 - Usunięcie wspomnienia nie usuwa go z historii rozmów.
 - `relevant_memories` dopasowuje po słowach, nie po znaczeniu.
-- Wiadomość właściciela trafia do historii także wtedy, gdy model nie odpowie (`chat`: `add_message` przed `ask_llm`).
+- Wiadomość właściciela trafia do historii także wtedy, gdy model nie odpowie (`chat`: `add_message` przed `ask_llm`). Widać to już w rozmowie: po nieudanych próbach wiadomości stoją w historii podwójnie.
 - Nazwy techniczne zostały po prototypie: zmienne `JARVIS_*`, baza `jarvis.sqlite3`.
 
 ## Następne kroki (z README prototypu, kolejność do decyzji autora)

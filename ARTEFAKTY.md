@@ -8,7 +8,8 @@ Przed użyciem bierzesz wersję `obowiązuje`. Każda zmiana to nowy numer i zmi
 
 | id | artefakt | wersja | stan | źródło prawdy | zmiana · commit |
 |---|---|---|---|---|---|
-| istota | program (backend `app.py`, interfejs `web/`, testy `tests/`) | 0.3.0 | obowiązuje | `app.py` (`VERSION`) | 2026-11-09 15:55 · nazwa Istota w interfejsie i promptach |
+| istota | program (backend `app.py`, interfejs `web/`, testy `tests/`) | 0.3.1 | obowiązuje | `app.py` (`VERSION`) | 2026-11-09 16:00 · Claude bez `temperature` (było HTTP 400) |
+| istota | ↳ 0.3.0 | 0.3.0 | wycofana | `app.py` (`VERSION`) | 2026-11-09 15:55 · nazwa Istota w interfejsie i promptach |
 | istota | ↳ 0.2.0 | 0.2.0 | wycofana | `app.py` (`VERSION`) | 2026-11-09 15:50 · model w chmurze z `.local/istota.env` |
 | istota | ↳ 0.1.1 | 0.1.1 | wycofana | `app.py` (`VERSION`) | 2026-11-09 11:34 · zamykanie połączeń z bazą, numer wersji w jednym miejscu |
 | istota | ↳ prototyp GPT „JARVIS HYBRID 0.1” | 0.1 | wycofana | commit `187aec9` | 2026-11-09 · bez zmian z `jarvis-hybryda-v0.1.zip` |

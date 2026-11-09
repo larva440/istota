@@ -23,3 +23,5 @@ Commit `187aec9`: prototyp bez zmian.
 → 11:34 uruchomienie w przeglądarce (127.0.0.1:8765, baza próbna poza repo): interfejs się ładuje; „Zapamiętaj: …” zapisuje do pamięci; rozmowa zwraca „Brak połączenia z modelem AI. Uruchom Ollama…” (Ollamy nie ma na komputerze, zgodnie z oczekiwaniem). Dług: wiadomość właściciela trafia do historii także wtedy, gdy model nie odpowie.
 
 → 11:34 commity `ef79332` (0.1.1) i `1b6c786` (proces), push.
+
+**15:44 — autor, dosłownie:** „odpal istotę”
